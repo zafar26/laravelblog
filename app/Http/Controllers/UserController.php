@@ -18,14 +18,17 @@ class UserController extends Controller
         $formFields = $request->validate([
             'name' => ['required', 'min:3'],
             'email' => ['required', 'email', Rule::unique('users', 'email')],
-            'password' => 'required|confirmed|min:6'
+            'password' => 'required|confirmed|min:6',
+            'usertype' => 'required'
         ]);
+        dd($formFields);
 
         // Hash Password
         $formFields['password'] = bcrypt($formFields['password']);
-
+        // dd($formFields);
         // Create User
         $user = User::create($formFields);
+        // dd($user);
 
         // Login
         auth()->login($user);

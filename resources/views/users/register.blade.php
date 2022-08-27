@@ -49,6 +49,25 @@
         @enderror
       </div>
 
+      
+      <div class="mb-6">
+        <label for="usertype" class="inline-block text-lg mb-2">
+          User type
+        </label>
+        <select name="usertype" id="usertype" class="border border-gray-200 rounded p-2 w-full" >
+          <option value="4">Subscriber</option>
+          <option value="3">Contributor</option>
+          <option value="2">Editor</option>
+          <option value="1">Admin</option>
+        </select>
+        {{-- <input type="password" class="border border-gray-200 rounded p-2 w-full" name="usertype"
+          value="{{old('password')}}" /> --}}
+
+        @error('usertype')
+        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+        @enderror
+      </div>
+
       <div class="mb-6">
         <button type="submit" class="bg-madaniColor text-white rounded py-2 px-4 hover:bg-black">
           Sign Up
