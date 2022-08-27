@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -21,15 +22,34 @@ class UserController extends Controller
             'password' => 'required|confirmed|min:6',
             'usertype' => 'required'
         ]);
-        dd($formFields);
-
+        // dd($formFields);
+        $usertype = $formFields['usertype'];
         // Hash Password
         $formFields['password'] = bcrypt($formFields['password']);
         // dd($formFields);
         // Create User
         $user = User::create($formFields);
         // dd($user);
-
+        if($usertype == 1){
+            // Admin 
+            $admin = Role::where('name','=','Admin')->first();
+            $user->assignRole($admin);
+        }
+        else if($usertype == 2){
+            // Editor 
+            $admin = Role::where('name','=','Editor')->first();
+            $user->assignRole($admin);
+        }
+        else if($usertype == 3){
+            // Contributor
+            $admin = Role::where('name','=','Contributor')->first();
+            $user->assignRole($admin);
+        }
+        else if($usertype == 4){
+            // Subscriber
+            $admin = Role::where('name','=','Subscriber')->first();
+            $user->assignRole($admin);
+        }
         // Login
         auth()->login($user);
 

@@ -31,20 +31,23 @@ class DatabaseSeeder extends Seeder
         // ]);
         $user = User::where('name','=','John Doe')->first();
         echo "USER id: $user->id \n";
-        // auth()->user()->assignRole('Admin');
-        $listing = Listing::factory(6)->create([
-            'user_id' => $user->id
-        ]);
-        $id = $listing[0]->id;
+
+        // $listing = Listing::factory(6)->create([
+        //     'user_id' => $user->id
+        // ]);
+        $listing = Listing::where('id','=','55')->first();
+        $id = $listing->id;
         echo "LISTING ID: $id \n ";
         Comment::factory()->create([
                 'user_id'=> $user->id,
-                'listing_id' =>$listing[0]->id
+                'listing_id' =>$listing->id
             ]
         );
-        
+        $this->rolesandPermissions($user);
     }
-    public function rolesandPermissions(){
+    public function rolesandPermissions($user){
+        echo "Roles&permissions";
+
         $permissions = array(
             "can see all post" => array('A','E'),
             "can see their post" =>array('A','E','C'),
@@ -59,20 +62,21 @@ class DatabaseSeeder extends Seeder
             'reject comment' => array('A','E'),
             'delete comment' => array('A',),
         );
-        $admin = Role::create(['name' => 'Admin']);
-        $editor = Role::create(['name' => 'Editor']);
-        $contributor = Role::create(['name' => 'Contributor']);
-        $subscriber = Role::create(['name' => 'Subscriber']);
+        // $admin = Role::create(['name' => 'Admin']);
+        // $editor = Role::create(['name' => 'Editor']);
+        // $contributor = Role::create(['name' => 'Contributor']);
+        // $subscriber = Role::create(['name' => 'Subscriber']);
         
-        // $admin = Role::findById(1);
-        // $editor = Role::findById(2);
-        // $contributor = Role::findById(3);
-        // $subscriber = Role::findById(4);
+        $admin = Role::where('name','=','Admin')->first();
+        $editor = Role::where('name','=','Editor')->first();
+        $contributor = Role::where('name','=','Contributor')->first();
+        $subscriber = Role::where('name','=','Subscriber')->first();
+        $user->assignRole($admin);
         
         echo "Before Looping";
-        foreach($permissions as $key => $value) {
-            $permission = Permission::create(['name' => $key]);
-        }
+        // foreach($permissions as $key => $value) {
+        //     $permission = Permission::create(['name' => $key]);
+        // }
         foreach($permissions as $key => $value) {
             // $permission = Permission::create(['name' => $key]);
             $permission = Permission::findByName($key);
