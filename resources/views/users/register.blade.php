@@ -69,7 +69,7 @@
       </div>
 
       <div class="mb-6">
-        <button type="submit" class="bg-madaniColor text-white rounded py-2 px-4 hover:bg-black">
+        <button type="submit" class="bg-testColor text-white rounded py-2 px-4 hover:bg-black">
           Sign Up
         </button>
       </div>
@@ -77,7 +77,7 @@
       <div class="mt-8">
         <p>
           Already have an account?
-          <a href="/login" class="text-madaniColor">Login</a>
+          <a href="/login" class="text-testColor">Login</a>
         </p>
       </div>
     </form>

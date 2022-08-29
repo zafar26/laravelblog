@@ -30,7 +30,7 @@
       </div>
 
       <div class="mb-6">
-        <button type="submit" class="bg-madaniColor text-white rounded py-2 px-4 hover:bg-black">
+        <button type="submit" class="bg-testColor text-white rounded py-2 px-4 hover:bg-black">
           Sign In
         </button>
       </div>
@@ -38,7 +38,7 @@
       <div class="mt-8">
         <p>
           Don't have an account?
-          <a href="/register" class="text-madaniColor">Register</a>
+          <a href="/register" class="text-testColor">Register</a>
         </p>
       </div>
     </form>

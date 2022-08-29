@@ -96,7 +96,7 @@
       </div>
 
       <div class="mb-6">
-        <button class="bg-madaniColor text-white rounded py-2 px-4 hover:bg-black">
+        <button class="bg-testColor text-white rounded py-2 px-4 hover:bg-black">
           Create Blog
         </button>
 
