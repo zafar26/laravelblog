@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
-use Illuminate\Http\Request;
+use App\Models\Listing;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 
@@ -83,23 +84,24 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, Listing $listing, Comment $comment)
     {
         // dd($request->isMethod('put'));
         // Make sure logged in user is owner
         // if($comment->user_id != auth()->id()) {
         //     abort(403, 'Unauthorized Action');
         // }
-        
+        // dd($comment->id);
+        // dd($listing->id);
         $formFields = $request->validate([
             'message' => 'required',
             // 'listing_id' => 'required',
         ]);
         $formFields['user_id'] = auth()->id();
-
+        // dd($formFields);
         $comment->update($formFields);
 
-        return back()->with('message', 'Comment updated successfully!');
+        return redirect("/listing/{{$listing->id}}")->with('message', 'Comment updated successfully!');
     
     }
 

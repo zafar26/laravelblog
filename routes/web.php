@@ -70,7 +70,7 @@ Route::post('/comment', [CommentController::class, 'create']);
 Route::get('/listing/{listing}/comment/edit/{comment}', [ListingController::class, 'editComment']);
 
 // Update Comment  
-Route::put('/comment/{comment}', [CommentController::class, 'update']);
+Route::put('/listing/{listing}/comment/{comment}', [CommentController::class, 'update']);
 
 // Delete Comment
 Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->middleware('auth');

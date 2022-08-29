@@ -57,21 +57,25 @@
       <div class="flex justify-between">
         <h1 class="text-gray-400 font-thin">{{$item['user_name']}}</h1>
         <div class="flex ">
-          <form  action="/listing/{{$listing->id}}/comment/edit/{{$item['id']}}">
-            {{-- @csrf
-            @method('POST')   --}}
-            <button  class="text-gray-500 fa-solid fa-pen-to-square"> Edit</button>
-          </form>
-          <form method="POST" action="/comment/{{$item['id']}}">
-            @csrf
-            @method('DELETE')  
-    
-            <button type="submit" class="ml-2 text-red-700 fa-solid fa-trash"> Delete</button>
-          </form>
+          @role('Editor|Admin')
+            <form  action="/listing/{{$listing->id}}/comment/edit/{{$item['id']}}">
+              {{-- @csrf
+              @method('POST')   --}}
+              <button  class="text-gray-500 fa-solid fa-pen-to-square"> Edit</button>
+            </form>
+          @endrole
+          @role('Admin')
+            <form method="POST" action="/comment/{{$item['id']}}">
+              @csrf
+              @method('DELETE')  
+      
+              <button type="submit" class="ml-2 text-red-700 fa-solid fa-trash"> Delete</button>
+            </form>
+          @endrole
         </div>
       </div>
       @if ($edit != null and $edit == true and $commentId == $item['id'])   
-        <form method="POST" action="/comment/{{$item['id']}}" enctype="multipart/form-data">
+        <form method="POST" action="/listing/{{$listing->id}}/comment/{{$item['id']}}" enctype="multipart/form-data">
           @csrf
           @method('PUT')
           <div class="mb-6">
